@@ -1,5 +1,11 @@
 # Team03Repo
 
+## Team Members:
+Faiq Malik
+Kevin Pham
+Vincent Wong
+Iceal Claveria
+
 This project was built using ASP.NET MVC 5.
 
 The environment used to build this project was Visual Studio Enterprise with Update 3.
