@@ -12,6 +12,8 @@ Iceal Claveria
 
 
 
+## Project Details
+
 This project was built using ASP.NET MVC 5.
 
 The environment used to build this project was Visual Studio Enterprise with Update 3.
