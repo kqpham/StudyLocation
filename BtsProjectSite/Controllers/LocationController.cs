@@ -8,7 +8,7 @@ namespace BtsProjectSite.Controllers
 {
     public class LocationController : Controller
     {
-        Manager m =new Manager();
+        ManageController m = new ManageController();
         // GET: Location
         public ActionResult Index()
         {
@@ -46,14 +46,14 @@ namespace BtsProjectSite.Controllers
             {
                 return View(newLocation);
             }
-            return RedirectToAction("Details", new {id = addedLocation.LocationId});
+            return RedirectToAction("Details", new { id = addedLocation.LocationId });
         }
 
         // GET: Location/Edit/5
         public ActionResult Edit(int? id)
         {
-            var data= m.LocationGetOne(id.GetValueOrDefault());
-            if (data ==null)
+            var data = m.LocationGetOne(id.GetValueOrDefault());
+            if (data == null)
             {
                 return HttpNotFound();
             }
@@ -107,7 +107,7 @@ namespace BtsProjectSite.Controllers
                 //return HttpNotFound();
             }
             m.LocationRemove(id);
-           //return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
 
         public ActionResult ModalAction(int id)
@@ -117,7 +117,7 @@ namespace BtsProjectSite.Controllers
             {
                 return HttpNotFound();
             }
-            return PartialView("_Location",data);
+            return PartialView("_Location", data);
         }
     }
 }

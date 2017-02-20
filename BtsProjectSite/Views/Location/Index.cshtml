@@ -27,48 +27,49 @@
             @Html.DisplayNameFor(model => model.City)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.WifiAvailability)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Outlet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StudyRoom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Printers)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Purchase)
-        </th>*@
+                @Html.DisplayNameFor(model => model.WifiAvailability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outlet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudyRoom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Printers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purchase)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Food)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Washrooms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HandicapAccess)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AcceptDebit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AcceptCredit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CashOnly)
-        </th>*@
+                @Html.DisplayNameFor(model => model.Food)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Washrooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HandicapAccess)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcceptDebit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcceptCredit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CashOnly)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Website)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -86,53 +87,53 @@
                 @Html.DisplayFor(modelItem => item.City)
             </td>
             @*<td>
-            @Html.DisplayFor(modelItem => item.WifiAvailability)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Outlet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StudyRoom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Printers)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Purchase)
-        </td>*@
+                    @Html.DisplayFor(modelItem => item.WifiAvailability)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Outlet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudyRoom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Printers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchase)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             @*<td>
-            @Html.DisplayFor(modelItem => item.Food)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Washrooms)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HandicapAccess)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AcceptDebit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AcceptCredit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CashOnly)
-        </td>*@
+                    @Html.DisplayFor(modelItem => item.Food)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Washrooms)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HandicapAccess)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcceptDebit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcceptCredit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CashOnly)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Website)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.LocationId}) |
-                @Html.ActionLink("Details", "Details", new {id = item.LocationId}) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.LocationId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.LocationId }) |
                 @* Method 2 *@
-                @Html.ActionLink("Delete","ModalAction","Location",new {id = item.LocationId}, new
-                {
-                    data_target = "#modal-container",
-                    data_toggle = "modal"
-                })
+                @Html.ActionLink("Delete", "ModalAction", "Location", new { id = item.LocationId }, new
+           {
+               data_target = "#modal-container",
+               data_toggle = "modal"
+           })
             </td>
         </tr>
     }
