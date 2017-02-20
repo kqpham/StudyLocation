@@ -2,9 +2,15 @@
 
 ## Team Members:
 Faiq Malik
+
 Kevin Pham
+
 Vincent Wong
+
 Iceal Claveria
+
+
+
 
 This project was built using ASP.NET MVC 5.
 
