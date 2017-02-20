@@ -1,0 +1,251 @@
+﻿@using System.Xml.Linq
+@model BtsProjectSite.Controllers.LocationWithTimings
+
+@{
+    ViewBag.Title = "Delete";
+    var name = Model.Name;
+    var addressFull = Model.Address + "," + Model.City + "," + Model.PostalCode;
+    var phoneNumber = Model.PhoneNumber;
+    var website = Model.Website;
+
+    @*Test area*@
+    //var address = "123 something st, somewhere";
+    var address = addressFull;
+    var requestUri = $"http://maps.googleapis.com/maps/api/geocode/xml?address={Uri.EscapeDataString(address)}&sensor=false";
+
+    var request = WebRequest.Create(requestUri);
+    var response = request.GetResponse();
+    var xdoc = XDocument.Load(response.GetResponseStream());
+
+    var result = xdoc.Element("GeocodeResponse")?.Element("result");
+    var locationElement = result?.Element("geometry")?.Element("location");
+    var lat = locationElement?.Element("lat");
+    var lng = locationElement?.Element("lng");
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    @*<h4>LocationWithTimings</h4>*@
+    <hr />
+    @*Location Information*@
+    <hr />
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>Name</dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>Address</dt>
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt>Postal Code</dt>
+            <dd>
+                @Html.DisplayFor(model => model.PostalCode)
+            </dd>
+            <dt>Phone Number</dt>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+            <dt>City</dt>
+            <dd>
+                @Html.DisplayFor(model => model.City)
+            </dd>
+            <dt>Description</dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>Website</dt>
+            <dd>
+                @Html.DisplayFor(model => model.Website)
+            </dd>
+        </dl>
+    </div>
+    @*Google Map*@
+    <h3>Location Display</h3>
+    <div id="map" class="col-md-6">
+        @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2881.0745747266315!2d-79.50104158414483!3d43.77131077911752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b2e2460772ad9%3A0xbc31fe6993cfec3d!2sSeneca%40York+Campus!5e0!3m2!1sen!2sca!4v1486364378206" width="600" height="450" frameborder="0" style="border: 0" allowfullscreen></iframe>*@
+    </div>
+    <style>
+        #map {
+            height: 400px;
+            width: 400px;
+        }
+    </style>
+    <script>
+        function initMap() {
+            //modify coordinates to change location
+            // var uluru = { lat: 43.771311, lng: -79.498853 };
+          var uluru = { lat: @lat.Value, lng: @lng.Value };
+          var map = new window.google.maps.Map(document.getElementById('map'), {
+              @*zoom sets the amount of area to show. setting 0 shows the entire planet. max readable is 17*@
+          zoom: 17,
+          center: uluru
+          });
+          var contentString = '<h5>@name</h5>' +
+              '<div>' +
+              '<p>@addressFull </p>'+
+              '<p>@phoneNumber</p>' +
+              '<p>@website </p>' +
+              '</div>';
+
+          var infowindow = new google.maps.InfoWindow({
+              content: contentString
+      });
+
+        var marker = new window.google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+
+          marker.addListener('click',
+              function() {
+                  infowindow.open(map, marker);
+              });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2XYssb3qlLDRd1KOE7Knxy-6hnrl1xbM&callback=initMap"
+            type="text/javascript"></script>
+    <br />
+    <hr />
+    @*Location Timings table*@
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <td>Day</td>
+                    <td>Opening</td>
+                    <td>Closing</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monday</td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingMondayOpeningTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingMondayClosingTime)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingTuesdayOpeningTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingTuesdayClosingTime)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingWednesdayOpeningTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingWednesdayClosingTime)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingThursdayOpeningTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingThursdayClosingTime)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingFridayOpeningTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingFridayClosingTime)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingSaturdayOpeningTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingSaturdayClosingTime)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingSundayOpeningTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TimingSundayClosingTime)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    @*Service Availability table*@
+    <div>
+        <table class="table table-striped table-bordered">
+            <tbody>
+                <tr>
+                    <td>Wifi</td>
+                    <td>@Html.DisplayFor(model => model.WifiAvailability)</td>
+                </tr>
+                <tr>
+                    <td>Outlet</td>
+                    <td>@Html.DisplayFor(model => model.Outlet)</td>
+                </tr>
+                <tr>
+                    <td>Study Room</td>
+                    <td>@Html.DisplayFor(model => model.StudyRoom)</td>
+                </tr>
+                <tr>
+                    <td>Printers</td>
+                    <td>@Html.DisplayFor(model => model.Printers)</td>
+                </tr>
+                <tr>
+                    <td>Purchase</td>
+                    <td>@Html.DisplayFor(model => model.Purchase)</td>
+                </tr>
+                <tr>
+                    <td>Food</td>
+                    <td>@Html.DisplayFor(model => model.Food)</td>
+                </tr>
+                <tr>
+                    <td>Washrooms</td>
+                    <td>@Html.DisplayFor(model => model.Washrooms)</td>
+                </tr>
+                <tr>
+                    <td>Handicap Access</td>
+                    <td>@Html.DisplayFor(model => model.HandicapAccess)</td>
+                </tr>
+                <tr>
+                    <td>Accept Debit</td>
+                    <td>@Html.DisplayFor(model => model.AcceptDebit)</td>
+                </tr>
+                <tr>
+                    <td>Accept Credit</td>
+                    <td>@Html.DisplayFor(model => model.AcceptCredit)</td>
+                </tr>
+                <tr>
+                    <td>Cash</td>
+                    <td>@Html.DisplayFor(model => model.CashOnly)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
