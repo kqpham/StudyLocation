@@ -15,8 +15,10 @@ namespace BtsProjectSite.Models
         {
 
         }
+        [Key,ForeignKey("Location")]
         public int TimingId { get; set; }
-        public int LocationId { get; set; }
+        
+        //public int LocationId { get; set; }
 
         [Display(Name = "Monday")]
         [DataType(DataType.Time)]

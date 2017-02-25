@@ -14,10 +14,11 @@ namespace BtsProjectSite.Models
             "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Location()
         {
-            Timings = new List<Timing>();
+            //Timings = new List<Timing>();
             Comments = new HashSet<Comment>();
+            Ratings = new List<Rating>();
         }
-
+        [Key]
         public int LocationId { get; set; }
 
         [Display(Name = "Name")]
@@ -63,12 +64,23 @@ namespace BtsProjectSite.Models
         [DataType(DataType.Url)]
         public string Website { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
-            "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Timing> Timings { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
+        //    "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Timing> Timings { get; set; }
+
+        public int TimingId { get; set; }
+
+         public virtual Timing Timings { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
             "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
+    "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rating> Ratings { get; set; }
+
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
     }
 }

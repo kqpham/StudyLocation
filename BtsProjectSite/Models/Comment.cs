@@ -15,9 +15,12 @@ namespace BtsProjectSite.Models
         {
 
         }
+        [Key]
         public int CommentId { get; set; }
 
         public int LocationId { get; set; }
+
+        public int AccountId { get; set; }
 
         [StringLength(250)]
         public string Comments { get; set; }
@@ -25,5 +28,7 @@ namespace BtsProjectSite.Models
         //public virtual ICollection<Comment> Comment { get; set; }
 
         public virtual Location Location { get; set; }
+
+        public virtual  AccountDetails Account { get; set; }
     }
 }

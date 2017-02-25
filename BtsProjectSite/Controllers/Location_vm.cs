@@ -11,7 +11,7 @@ namespace BtsProjectSite.Controllers
     {
         public LocationAdd()
         {
-            Timings = new List<Timing>();
+           // Timings = new List<Timing>();
         }
 
         [Display(Name = "Name")]
@@ -57,7 +57,7 @@ namespace BtsProjectSite.Controllers
         [DataType(DataType.Url)]
         public string Website { get; set; }
 
-        public IEnumerable<Timing> Timings { get; set; }
+        public Timing Timings { get; set; }
     }
 
     public class LocationBase : LocationAdd
