@@ -129,4 +129,5 @@ namespace BtsProjectSite.Controllers
         [DisplayFormat(DataFormatString = "{0: HH:MM tt}", ApplyFormatInEditMode = true)]
         public DateTime? TimingSundayClosingTime { get; set; }
     }
+
 }
