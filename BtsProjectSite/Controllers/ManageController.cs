@@ -33,10 +33,12 @@ namespace BtsProjectSite.Controllers
                 cfg.CreateMap<Models.Location, Controllers.LocationBase>();
                 cfg.CreateMap<Models.Location, Controllers.LocationWithTimings>();
                 cfg.CreateMap<Models.Timing, Controllers.TimingBase>();
+                cfg.CreateMap<Models.Comment, Controllers.CommentBase>();
 
                 //mapping for storing data to database
                 cfg.CreateMap<Controllers.LocationAdd, Models.Location>();
                 cfg.CreateMap<Controllers.TimingAdd, Models.Timing>();
+                cfg.CreateMap<Controllers.CommentAdd, Models.Comment>();
 
             });
 
@@ -400,6 +402,27 @@ namespace BtsProjectSite.Controllers
             }
             ds.LocationWithTimings.Remove(location);
             ds.SaveChanges();
+        }
+
+        /*Comment part starts*/
+        public IEnumerable<CommentBase> CommentGetAll()
+        {
+            return mapper.Map<IEnumerable<CommentBase>>(ds.Comments);
+        }
+
+        public CommentBase CommentGetByID(int id)
+        {
+            var o = ds.Comments.Find(id);
+
+            return (o == null) ? null : mapper.Map<CommentBase>(o);
+        }
+
+        public CommentBase CommentAdd(CommentAdd newItem)
+        {
+            var addedItem = ds.Comments.Add(mapper.Map<Comment>(newItem));
+            ds.SaveChanges();
+
+            return (addedItem == null) ? null : mapper.Map<CommentBase>(addedItem);
         }
         #region Helpers
         // Used for XSRF protection when adding external logins
