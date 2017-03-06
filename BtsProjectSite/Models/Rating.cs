@@ -13,6 +13,9 @@ namespace BtsProjectSite.Models
 
         public int AccountId { get; set; }
 
+        public int Value { get; set; }
+
+
         public virtual Location Location { get; set; }
 
         public virtual AccountDetails Account{ get; set; }
