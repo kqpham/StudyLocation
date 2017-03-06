@@ -39,18 +39,38 @@ namespace BtsProjectSite.Controllers
 
         // POST: Comments/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(int? id, LocationEditComments newComment)
         {
-            try
-            {
+            //try
+           // {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+            if (!ModelState.IsValid)
+            {
+                //return View(newComment);
+                  return RedirectToAction("edit", new { id = newComment.Id });
             }
-            catch
+
+            if(id.GetValueOrDefault() != newComment.Id)
+            {
+                return RedirectToAction("index");
+            }
+
+            //var editItem = m.Location
+                //var addedComment = m.CommentAdd(newComment);
+
+                /*if(addedComment == null)
+                {
+                    return View(newComment);
+                }
+                else
+                {
+                    return RedirectToAction("Details", new { id = addedComment.CommentId });
+                }*/
+            //}
+            /*catch
             {
                 return View();
-            }
+            }*/
         }
 
         // GET: Comments/Edit/5

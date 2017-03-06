@@ -23,4 +23,24 @@ namespace BtsProjectSite.Controllers
         [Key]
         public int CommentId { get; set; }
     }
+
+    public class CommentWithLocation : CommentBase
+    {
+        public CommentWithLocation()
+        {
+            locations = new List<LocationBase>();
+        }
+        public int Id { get; set; }
+        public IEnumerable<LocationBase> locations { get; set; }
+    }
+
+    /*public class LocationEditComments
+    {
+        public LocationEditComments()
+        {
+            LocationIds = new List<int>();
+        }
+        public int Id { get; set; }
+        public IEnumerable<int> LocationIds { get; set; }
+    }*/
 }

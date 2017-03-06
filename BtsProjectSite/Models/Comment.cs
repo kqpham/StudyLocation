@@ -15,7 +15,7 @@ namespace BtsProjectSite.Models
         {
 
         }
-        [Key]
+
         public int CommentId { get; set; }
 
         public int LocationId { get; set; }
@@ -25,7 +25,7 @@ namespace BtsProjectSite.Models
         [StringLength(250)]
         public string CommentLines { get; set; }
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<Comment> Comment { get; set; }
+        //public virtual ICollection<Comment> Commentlines { get; set; }
 
         public virtual Location Location { get; set; }
 
