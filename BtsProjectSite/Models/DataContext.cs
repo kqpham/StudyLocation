@@ -21,7 +21,7 @@ namespace BtsProjectSite.Models
         }
         //public virtual DbSet<Location> Locations { get; set; }
         public DbSet<LocationBase> LocationsBase { get; set; }
-
+        public DbSet<Comment> Comments { get; set; }
         public System.Data.Entity.DbSet<BtsProjectSite.Controllers.LocationWithTimings> LocationWithTimings { get; set; }
 
         //public System.Data.Entity.DbSet<BtsProjectSite.Controllers.LocationBase> Locations { get; set; }
