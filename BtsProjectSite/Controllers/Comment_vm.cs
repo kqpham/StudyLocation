@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BtsProjectSite.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -27,9 +29,8 @@ namespace BtsProjectSite.Controllers
     {
         public CommentWithLocation()
         {
-            locations = new List<LocationBase>();
+
         }
-        public int Id { get; set; }
-        public IEnumerable<LocationBase> locations { get; set; }
+        public Location locations { get; set; }
     }
 }

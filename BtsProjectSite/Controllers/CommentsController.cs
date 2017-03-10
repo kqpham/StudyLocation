@@ -21,7 +21,7 @@ namespace BtsProjectSite.Controllers
         {
             var o = m.CommentGetByID(id.GetValueOrDefault());
 
-            if(o== null)
+            if (o == null)
             {
                 return HttpNotFound();
             }
@@ -39,33 +39,46 @@ namespace BtsProjectSite.Controllers
 
         // POST: Comments/Create
         [HttpPost]
-        public ActionResult Create(int? id, LocationEditComments newComment)
+        public ActionResult Create(CommentWithLocation newComment)
         {
             //try
-           // {
-                // TODO: Add insert logic here
+            // {
+            // TODO: Add insert logic here
+            /* if (!ModelState.IsValid)
+             {
+                 //return View(newComment);
+                   return RedirectToAction("edit", new { id = newComment.Id });
+             }
+
+             if(id.GetValueOrDefault() != newComment.Id)
+             {
+                 return RedirectToAction("index");
+             }
+             var editItem = m.LocationEditComments(newComment);
+
+             if(editItem == null)
+             {
+                 return RedirectToAction("ByLocation", new { id = newComment.Id });
+             }
+             else
+             {
+                 return RedirectToAction("ByLocationWithComments", new { id = newComment.Id });
+             }*/
             if (!ModelState.IsValid)
             {
-                //return View(newComment);
-                  return RedirectToAction("edit", new { id = newComment.Id });
+                return View(newComment);
             }
 
-            if(id.GetValueOrDefault() != newComment.Id)
+            var addedComment = m.LocationAddComment(newComment);
+
+            if (addedComment == null)
             {
-                return RedirectToAction("index");
+                return View(newComment);
             }
-
-            //var editItem = m.Location
-                //var addedComment = m.CommentAdd(newComment);
-
-                /*if(addedComment == null)
-                {
-                    return View(newComment);
-                }
-                else
-                {
-                    return RedirectToAction("Details", new { id = addedComment.CommentId });
-                }*/
+            else
+            {
+                return RedirectToAction("Details", new { id = addedComment.CommentId });
+            }
             //}
             /*catch
             {

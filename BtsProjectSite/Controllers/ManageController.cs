@@ -33,12 +33,13 @@ namespace BtsProjectSite.Controllers
                 cfg.CreateMap<Models.Location, Controllers.LocationBase>();
                 cfg.CreateMap<Models.Location, Controllers.LocationWithTimings>();
                 cfg.CreateMap<Models.Timing, Controllers.TimingBase>();
-                //cfg.CreateMap<Models.Comment, Controllers.CommentBase>();
+                cfg.CreateMap<Models.Comment, Controllers.CommentBase>();
+                cfg.CreateMap<Models.Comment, Controllers.CommentWithLocation>();
 
                 //mapping for storing data to database
                 cfg.CreateMap<Controllers.LocationAdd, Models.Location>();
                 cfg.CreateMap<Controllers.TimingAdd, Models.Timing>();
-                //cfg.CreateMap<Controllers.CommentAdd, Models.Comment>();
+                cfg.CreateMap<Controllers.CommentAdd, Models.Comment>();
 
             });
 
@@ -61,9 +62,9 @@ namespace BtsProjectSite.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -392,6 +393,24 @@ namespace BtsProjectSite.Controllers
             ds.SaveChanges();
             return (addedLocation == null) ? null : mapper.Map<LocationWithTimings>(addedLocation);
         }
+        /* public LocationEditComments LocationEditComments(LocationEditComments newComment)
+         {
+             var nc = ds.LocationWithTimings.Find(newComment.Id);
+             if(nc == null)
+             {
+                 return null;
+             }
+             ds.Entry(nc).CurrentValues.SetValues(newComment);
+             ds.SaveChanges();
+             return mapper.Map<LocationEditComments>(nc);
+         }*/
+
+        public CommentWithLocation LocationAddComment(CommentBase newComment)
+        {
+            var addComment = ds.Comments.Add(mapper.Map<Comment>(newComment));
+            ds.SaveChanges();
+            return (addComment == null) ? null : mapper.Map<CommentWithLocation>(addComment);
+        }
 
         public void LocationRemove(int? id)
         {
@@ -405,25 +424,41 @@ namespace BtsProjectSite.Controllers
         }
 
         /*Comment part starts*/
-        //public IEnumerable<CommentBase> CommentGetAll()
-        //{
-        //    return mapper.Map<IEnumerable<CommentBase>>(ds.Comments);
-        //}
+        public IEnumerable<CommentBase> CommentGetAll()
+        {
+            return mapper.Map<IEnumerable<CommentBase>>(ds.Comments);
+        }
 
-        //public CommentBase CommentGetByID(int id)
-        //{
-        //    var o = ds.Comments.Find(id);
+        public CommentBase CommentGetByID(int id)
+        {
+            var o = ds.Comments.Find(id);
 
-        //    return (o == null) ? null : mapper.Map<CommentBase>(o);
-        //}
+            return (o == null) ? null : mapper.Map<CommentBase>(o);
+        }
 
-        //public CommentBase CommentAdd(CommentAdd newItem)
-        //{
-        //    var addedItem = ds.Comments.Add(mapper.Map<Comment>(newItem));
-        //    ds.SaveChanges();
+        /* public CommentBase CommentAdd(CommentAdd newComment)
+         {
+             var addedComment = ds.CommentLines.Add(mapper.Map<Comment>(newComment));
+             ds.SaveChanges();
 
-        //    return (addedItem == null) ? null : mapper.Map<CommentBase>(addedItem);
-        //}
+             return (addedComment == null) ? null : mapper.Map<CommentBase>(addedComment);
+         }*/
+        public IEnumerable<LocationWithComments> LocationGetAllWithComments()
+        {
+            return mapper.Map<IEnumerable<LocationWithComments>>
+                (ds.LocationsBase.Include("Comment").OrderBy(e => e.Name));
+        }
+
+        public class LocationWithComments
+        {
+            public LocationWithComments()
+            {
+                CommentIds = new List<int>();
+            }
+            public int Id { get; set; }
+            public IEnumerable<int> CommentIds { get; set; }
+        }
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -475,6 +510,6 @@ namespace BtsProjectSite.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
