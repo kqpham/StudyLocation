@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BtsIntegrated.Models.History">
+    <Position X="6.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAgIAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Models\History.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Locations" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BtsIntegrated.Models.Location">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQIEAAAAECggAIIIgAIQIQAAgCBAAACAAAAAgQAIAA=</HashCode>
+      <FileName>Models\Location.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Timing" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Comments" />
+      <Property Name="Ratings" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BtsIntegrated.Models.Rating">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAIAAAAAgIAAAAAAAAAAAAAAAAgAAAAAEA=</HashCode>
+      <FileName>Models\Rating.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Location" />
+      <Property Name="Account" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BtsIntegrated.Models.Timing">
+    <Position X="12.25" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABIAAJAAAAAABACAAIiAgCAAKAABABAgAAAAAAAAgA=</HashCode>
+      <FileName>Models\Timing.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Location" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BtsIntegrated.Models.Comment">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAgIAAAAAAAAAgAAgAAAAAAAAAEA=</HashCode>
+      <FileName>Models\Comment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Location" />
+      <Property Name="Account" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BtsIntegrated.Models.RoleClaim">
+    <Position X="0.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RoleClaim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BtsIntegrated.Models.Account">
+    <Position X="3.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAQACAAAAIQA=</HashCode>
+      <FileName>Models\Account.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Ratings" />
+      <Property Name="Comments" />
+      <Property Name="History" />
+      <Property Name="Recommendations" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BtsIntegrated.Models.RecommendLocation">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAIIgAAQAQAAAAAAAACAAAAAAAAAEA=</HashCode>
+      <FileName>Models\RecommendLocation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Account" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
