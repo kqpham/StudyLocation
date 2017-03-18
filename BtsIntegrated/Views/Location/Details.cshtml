@@ -90,14 +90,16 @@
               '<p>@website </p>' +
               '</div>';
 
-          var infowindow = new google.maps.InfoWindow({
-              content: contentString
-      });
+            var infowindow = new google.maps.InfoWindow
+                ({
+                    content: contentString
+                });
 
-        var marker = new window.google.maps.Marker({
-          position: uluru,
-          map: map
-        });
+            var marker = new window.google.maps.Marker
+                ({
+                      position: uluru,
+                      map: map
+                });
 
           marker.addListener('click',
               function() {

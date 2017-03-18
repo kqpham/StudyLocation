@@ -129,4 +129,26 @@ namespace BtsIntegrated.Controllers
         [DisplayFormat(DataFormatString = "{0: HH:MM tt}", ApplyFormatInEditMode = true)]
         public string TimingSundayClosingTime { get; set; }
     }
+
+    public class UserLocation
+    {
+        [Required]
+        public string PostalCode { get; set; }
+    }
+
+    public class UserGeoLocation
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+    }
+
+    public class UserGeoWithLocations : UserGeoLocation
+    {
+        public UserGeoWithLocations()
+        {
+            Locations = new List<LocationBase>();
+        }
+
+        public IEnumerable<LocationBase> Locations;
+    }
 }

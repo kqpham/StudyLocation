@@ -195,6 +195,29 @@ namespace BtsIntegrated.Controllers
             return mapper.Map<LocationWithTimings>(addedLocation);
         }
 
+        public double[] GetUserLatLngCoords(string input)
+        {
+            double[] coords = new double[2];
+            //var postalCode = input.Replace(" ", "");
+            var requestUri = $"http://maps.googleapis.com/maps/api/geocode/xml?address={Uri.EscapeDataString(input)}&sensor=false";
+            var request = WebRequest.Create(requestUri);
+            var response = request.GetResponse();
+            var xdoc = XDocument.Load(response.GetResponseStream());
+            var result = xdoc.Element("GeocodeResponse")?.Element("result");
+            var locationElement = result?.Element("geometry")?.Element("location");
+            var lat = locationElement?.Element("lat");
+            var lng = locationElement?.Element("lng");
+            if (lat != null)
+            {
+                coords[0] = Convert.ToDouble(lat.Value);
+            }
+            if (lng != null)
+            {
+                coords[1] = Convert.ToDouble(lng.Value);
+            }
+            return coords;
+        }
+
         /*
          * Returns an arry of double of size 2 i.e. 0 and 1. 
          * Each array index contains the data for the coordinates of a locaiton provided a variable
