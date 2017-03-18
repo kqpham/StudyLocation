@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using System.Xml.Linq;
 
 namespace BtsIntegrated.Controllers
@@ -33,6 +34,10 @@ namespace BtsIntegrated.Controllers
         [HttpPost]
         public ActionResult Markers(string postalCode)
         {
+            if (postalCode.IsEmpty())
+            {
+                return View("Index");
+            }
             var data = m.GetUserLatLngCoords(postalCode);
             var userGeoCoord = new UserGeoWithLocations
             {

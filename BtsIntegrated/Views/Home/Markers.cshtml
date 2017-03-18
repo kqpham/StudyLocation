@@ -1,24 +1,8 @@
 ﻿@model BtsIntegrated.Controllers.UserGeoWithLocations
 @{
     ViewBag.Title = "Markers";
-    var locationCount = Model.Locations.Count();
-    string[] locationName = new string[locationCount];
-    string[] locationAddress = new string[locationCount];
-    string[] locationPhone = new string[locationCount];
-    string[] locationWebsite = new string[locationCount];
-    double[] locationLat = new double[locationCount];
-    double[] locationLng = new double[locationCount];
-    var j = 0;
-    foreach (var location in Model.Locations)
-    {
-        locationName[j] = location.Name;
-        locationAddress[j] = location.Address;
-        locationLat[j] = location.Latitude;
-        locationLng[j] = location.Longitude;
-        locationPhone[j] = location.PhoneNumber;
-        locationWebsite[j] = location.Website;
-        j++;
-    }
+
+    
 }
 
 <h2>Markers</h2>
@@ -42,30 +26,33 @@
                 center: uluru
             });
 
-            var marker = new window.google.maps.Marker({
+            var markerUser = new window.google.maps.Marker({
                 position: uluru,
                 map: map
             });
+            var contentStringUser = '<h5>You are here</h5>';
+            var infowindowUser = new window.google.maps.InfoWindow
+                ({
+                    content: contentStringUser
+                });
 
-            marker.addListener('click',
+            markerUser.addListener('click',
             function() {
-                infowindow.open(map, marker);
+                infowindowUser.open(map, markerUser);
             });
 
-            //var Locations = @Model.Locations;
-
-            var infowindow = new window.google.maps.InfoWindow({});
+             var infowindow = new window.google.maps.InfoWindow({});
 
             var i;
+            var marker;
             var locationLat=new Array();
             var locationLng=new Array();
             var locationName=new Array();
             var locationAddress=new Array();
             var locationPhone=new Array();
             var locatioWebsite=new Array();
+            var lCount = @Model.Locations.Count();
             var contentString = [];
-            var lCount = @locationCount;
-
             @foreach (var data in Model.Locations)
             {
                 @:locationLat.push("@data.Latitude");
