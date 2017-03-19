@@ -252,6 +252,7 @@ namespace BtsIntegrated.Controllers
             }
             return coords;
         }
+
         public void LocationRemove(int? id)
         {
             var location = ds.Locations.Find(id.GetValueOrDefault());
@@ -262,6 +263,30 @@ namespace BtsIntegrated.Controllers
             ds.Locations.Remove(location);
             ds.SaveChanges();
         }
+
+        //Comments Methods
+
+        public IEnumerable<CommentBase> CommentsGetAll()
+        {
+            return mapper.Map<IEnumerable<CommentBase>>(ds.Comments);
+        }
+
+        public IEnumerable<CommentWithLocation> GetCommentsOneLocation(int id)
+        {
+            var data = ds.Comments.Include("Location").SingleOrDefault(i => i.Location.LocationId == id);
+            return (data == null) ? null : mapper.Map<IEnumerable<CommentWithLocation>>(data);
+        }
+
+        public CommentWithLocation LocationAddComment(CommentBase newComment)
+        {
+            var addComment = ds.Comments.Add(mapper.Map<Comment>(newComment));
+            ds.SaveChanges();
+            return (addComment == null) ? null : mapper.Map<CommentWithLocation>(addComment);
+        }
+
+
+        //End of Comment Section
+
         // Add some programmatically-generated objects to the data store
         // Can write one method, or many methods - your decision
         // The important idea is that you check for existing data first

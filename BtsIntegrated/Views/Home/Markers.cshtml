@@ -71,12 +71,17 @@
                     map: map
                 });
 
+                    //Insert hyperlink inot the provided areas to configure the 
+                    //redirection to specified views
 
                 contentString.push( '<h5>'+ locationName[i] +'</h5>' +
                     '<div>' +
                     '<p>'+ locationAddress[i] +'</p>'+
                     '<p>'+ locationPhone[i] +'</p>' +
                     '<p>'+ locatioWebsite[i] +'</p>' +
+                    '<a href=""> Comment About Location...</a>' +
+                    '</br>'+
+                    '<a href=""> Rate Locatoin...</a>' +
                     '</div>');
 
                 window.google.maps.event.addListener(marker, 'click', (function (marker, i) {
@@ -86,7 +91,6 @@
                 }
             })(marker, i));
             }
-            var test = @Model.Latitude;
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2XYssb3qlLDRd1KOE7Knxy-6hnrl1xbM&callback=initMap"

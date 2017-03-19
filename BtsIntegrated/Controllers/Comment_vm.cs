@@ -31,6 +31,6 @@ namespace BtsIntegrated.Controllers
         {
 
         }
-        public Location locations { get; set; }
+        public Location Locations { get; set; }
     }
 }
