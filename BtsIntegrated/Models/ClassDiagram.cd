@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BtsIntegrated.Models.History">
-    <Position X="6.5" Y="6.5" Width="1.5" />
+    <Position X="6.5" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAgIAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Models\History.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Account" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Locations" />
     </ShowAsCollectionAssociation>
@@ -13,7 +16,7 @@
   <Class Name="BtsIntegrated.Models.Location">
     <Position X="9.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAQIEAAAAECggAIIIgAIQIQAAgCBAAACAAAAAgQAIAA=</HashCode>
+      <HashCode>EAQIEABAAECggAIIIgAIQIQAAgCBAAACAAAAAgQAIAA=</HashCode>
       <FileName>Models\Location.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -22,6 +25,7 @@
     <ShowAsCollectionAssociation>
       <Property Name="Comments" />
       <Property Name="Ratings" />
+      <Property Name="Histories" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="BtsIntegrated.Models.Rating">
@@ -38,7 +42,7 @@
   <Class Name="BtsIntegrated.Models.Timing">
     <Position X="12.25" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AABIAAJAAAAAABACAAIiAgCAAKAABABAgAAAAAAAAgA=</HashCode>
+      <HashCode>AABAAAJAAAAAABACAAIiAgCAAKAABABAgAAAAAAAAgA=</HashCode>
       <FileName>Models\Timing.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

@@ -7,7 +7,6 @@ using System.Web;
 
 namespace BtsIntegrated.Models
 {
-
     [Table("Location")]
     public class Location
     {
@@ -15,7 +14,7 @@ namespace BtsIntegrated.Models
             "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Location()
         {
-            //Timing = new Timing();
+            Histories = new List<History>();
             Comments = new HashSet<Comment>();
             Ratings = new List<Rating>();
         }
@@ -80,6 +79,10 @@ namespace BtsIntegrated.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
     "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<Rating> Ratings { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
+"CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public ICollection<History> Histories { get; set; }
 
         public double Longitude { get; set; }
         public double Latitude { get; set; }
