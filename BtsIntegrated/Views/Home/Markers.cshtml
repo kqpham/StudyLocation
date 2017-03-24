@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Markers";
 
-    
+    var tempLat=0;
+    var tempLng=0;
 }
 
 <h2>Markers</h2>
@@ -96,5 +97,21 @@
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2XYssb3qlLDRd1KOE7Knxy-6hnrl1xbM&callback=initMap"
             type="text/javascript"></script>
+    <br />
+    <br/>
+    @using (Html.BeginForm("Markers", "Home", FormMethod.Post))
+    {
+        <div class="col-lg-3"></div>
+        <div class="form-group col-lg-4">
+            @Html.EditorFor(m => m.PostalCode, new { htmlAttributes = new { @class = "form-control input-lg" } })
+            @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+            @Html.HiddenFor(p => p.PostalCode)
+            <br />
+            <div class="form-group col-lg-2">
+                <input type="submit" value="Search Again" class="btn-lg btn-primary" />
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    }
 
 </div>

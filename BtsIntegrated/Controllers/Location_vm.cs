@@ -148,7 +148,8 @@ namespace BtsIntegrated.Controllers
         {
             Locations = new List<LocationBase>();
         }
-
+        [Required]
+        public string PostalCode { get; set; }
         public IEnumerable<LocationBase> Locations;
     }
 

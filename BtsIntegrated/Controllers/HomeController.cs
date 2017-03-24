@@ -31,29 +31,29 @@ namespace BtsIntegrated.Controllers
             return View();
         }
 
-        //[Route("markers/{postalcode}")]
-        [HttpGet]
-        public ActionResult Markers(string postalCode)
+        //[Route("Markers/{postalCode}")]
+        public ActionResult Markers()
         {
-            if (postalCode.IsEmpty())
-            {
-                return View("Index");
-            }
-            var data = m.GetUserLatLngCoords(postalCode);
-            var userGeoCoord = new UserGeoWithLocations
-            {
-                Latitude = data[0],
-                Longitude = data[1],
-                Locations = m.LocationGetAll()
+            //if (postalCode.IsEmpty())
+            //{
+            //    return View("Index");
+            //}
+            //var data = m.GetUserLatLngCoords(postalCode);
+            //var userGeoCoord = new UserGeoWithLocations
+            //{
+            //    Latitude = data[0],
+            //    Longitude = data[1],
+            //    Locations = m.LocationGetAll()
 
-            };
-            return View(userGeoCoord);
+            //};
+            //return View(userGeoCoord);
+            return View("Index");
         }
 
         //POST
         [HttpPost]
-        //[Route("markers/{postalcode}")]
-        public ActionResult Markers(string postalCode, int? id)
+        //[Route("Markers/{postalCode}")]
+        public ActionResult Markers(string postalCode)
         {
             //SetTemp(postalCode);
             if (postalCode.IsEmpty())

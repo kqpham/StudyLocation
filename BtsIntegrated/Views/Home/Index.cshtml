@@ -10,15 +10,16 @@
  
 </div>
 <div class="row">
-    @using (Html.BeginForm("Markers", "Home",FormMethod.Post,new {postalCode="postalCode"}))
+    @using (Html.BeginForm("Markers", "Home",FormMethod.Post))
     {
         <div class="col-lg-3"></div>
         <div class="form-group col-lg-4">
             @Html.EditorFor(m => m.PostalCode, new { htmlAttributes = new { @class = "form-control input-lg" } })
             @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+            @Html.HiddenFor(p=>p.PostalCode)
             <br />
             <div class="form-group col-lg-2">
-                <input type="submit" value="Find Me" class="btn-lg btn-primary" />
+                <input type="submit" value="Search" class="btn-lg btn-primary" />
             </div>
         </div>
         <div class="col-lg-3"></div>
