@@ -229,6 +229,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\Comment_vm.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -236,29 +237,15 @@
     <Compile Include="Controllers\Location_vm.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Manager.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\Rating_vm.cs" />
     <Compile Include="Controllers\Timing_vm.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703150406383_version0.cs" />
-    <Compile Include="Migrations\201703150406383_version0.Designer.cs">
-      <DependentUpon>201703150406383_version0.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703150425551_version1.cs" />
-    <Compile Include="Migrations\201703150425551_version1.Designer.cs">
-      <DependentUpon>201703150425551_version1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703150431160_version2.cs" />
-    <Compile Include="Migrations\201703150431160_version2.Designer.cs">
-      <DependentUpon>201703150431160_version2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703150453536_version3.cs" />
-    <Compile Include="Migrations\201703150453536_version3.Designer.cs">
-      <DependentUpon>201703150453536_version3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703151337462_version4.cs" />
-    <Compile Include="Migrations\201703151337462_version4.Designer.cs">
-      <DependentUpon>201703151337462_version4.cs</DependentUpon>
+    <Compile Include="Migrations\201703242130249_version6.cs" />
+    <Compile Include="Migrations\201703242130249_version6.Designer.cs">
+      <DependentUpon>201703242130249_version6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -359,9 +346,11 @@
     <Content Include="Views\Location\DetailForUser.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\ServerError.cshtml" />
+    <Content Include="Views\Rating\_Rating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -370,20 +359,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703150406383_version0.resx">
-      <DependentUpon>201703150406383_version0.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703150425551_version1.resx">
-      <DependentUpon>201703150425551_version1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703150431160_version2.resx">
-      <DependentUpon>201703150431160_version2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703150453536_version3.resx">
-      <DependentUpon>201703150453536_version3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703151337462_version4.resx">
-      <DependentUpon>201703151337462_version4.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703242130249_version6.resx">
+      <DependentUpon>201703242130249_version6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

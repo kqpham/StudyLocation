@@ -32,22 +32,24 @@ namespace BtsIntegrated.Controllers
         }
 
         //[Route("Markers/{postalCode}")]
-        public ActionResult Markers()
+        public ActionResult Markers(UserGeoLocation data)
         {
-            //if (postalCode.IsEmpty())
-            //{
-            //    return View("Index");
-            //}
-            //var data = m.GetUserLatLngCoords(postalCode);
-            //var userGeoCoord = new UserGeoWithLocations
-            //{
-            //    Latitude = data[0],
-            //    Longitude = data[1],
-            //    Locations = m.LocationGetAll()
+            try
+            {
+                var userGeoCoord = new UserGeoWithLocations
+                {
+                    Latitude = data.Latitude,
+                    Longitude = data.Longitude,
+                    Locations = m.LocationGetAll()
 
-            //};
-            //return View(userGeoCoord);
-            return View("Index");
+                };
+                return View(userGeoCoord);
+            }
+            catch
+            {
+                return View("Index");
+            }
+
         }
 
         //POST

@@ -20,7 +20,7 @@ namespace BtsIntegrated.Models
 
         public int LocationId { get; set; }
 
-        public int AccountId { get; set; }
+        public string UserName { get; set; }
 
         [StringLength(250)]
         public string CommentLines { get; set; }

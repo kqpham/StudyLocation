@@ -16,7 +16,7 @@ namespace BtsIntegrated.Models
         [Key]
         public int HistoryId { get; set; }
 
-        public int AccountId { get; set; }
+        public string UserName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
 "CA2227:CollectionPropertiesShouldBeReadOnly")]

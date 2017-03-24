@@ -11,7 +11,7 @@ namespace BtsIntegrated.Models
         [Key]
         public int RecommendLocationId { get; set; }
 
-        public int AccountId { get; set; }
+        public string UserName { get; set; }
 
         [Display(Name = "Name")]
         public string Name { get; set; }

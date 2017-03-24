@@ -8,6 +8,7 @@ using AutoMapper;
 using BtsIntegrated.Models;
 using System.Security.Claims;
 using System.Xml.Linq;
+using Microsoft.AspNet.Identity;
 
 namespace BtsIntegrated.Controllers
 {
@@ -61,11 +62,13 @@ namespace BtsIntegrated.Controllers
                 cfg.CreateMap<Models.Timing, Controllers.TimingBase>();
                 cfg.CreateMap<Models.Comment, Controllers.CommentBase>();
                 cfg.CreateMap<Models.Comment, Controllers.CommentWithLocation>();
+                cfg.CreateMap<Rating, RatingBase>();
 
                 //mapping for storing data to database
                 cfg.CreateMap<Controllers.LocationAdd, Models.Location>();
                 cfg.CreateMap<Controllers.TimingAdd, Models.Timing>();
                 cfg.CreateMap<Controllers.CommentAdd, Models.Comment>();
+                cfg.CreateMap<RatingAdd, Rating>();
             });
 
             mapper = config.CreateMapper();
@@ -282,6 +285,19 @@ namespace BtsIntegrated.Controllers
             var addComment = ds.Comments.Add(mapper.Map<Comment>(newComment));
             ds.SaveChanges();
             return (addComment == null) ? null : mapper.Map<CommentWithLocation>(addComment);
+        }
+
+        //Ratings Methods
+
+        //public RatingBase GetOneLoactionForRating(int id)
+        //{
+            
+        //}
+        public void RatingAdd(RatingAdd newRating)
+        {
+            var addedRating = ds.Ratings.Add(mapper.Map<Rating>(newRating));
+            addedRating.UserName = HttpContext.Current.User.Identity.Name;
+            ds.SaveChanges();
         }
 
 

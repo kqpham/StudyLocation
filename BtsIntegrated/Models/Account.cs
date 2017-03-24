@@ -15,7 +15,6 @@ namespace BtsIntegrated.Models
             History = new List<History>();
             Recommendations = new List<RecommendLocation>();
         }
-
         public int AccountId { get; set; }
         [Display(Name = "User name")]
         public string UserName { get; set; }
