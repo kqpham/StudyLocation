@@ -31,7 +31,7 @@ namespace BtsIntegrated.Controllers
             return View();
         }
 
-        [Route("markers/{postalcode}")]
+        //[Route("markers/{postalcode}")]
         [HttpGet]
         public ActionResult Markers(string postalCode)
         {
@@ -52,7 +52,7 @@ namespace BtsIntegrated.Controllers
 
         //POST
         [HttpPost]
-        [Route("markers/{postalcode}")]
+        //[Route("markers/{postalcode}")]
         public ActionResult Markers(string postalCode, int? id)
         {
             //SetTemp(postalCode);

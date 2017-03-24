@@ -230,6 +230,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Comment_vm.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\Location_vm.cs" />
@@ -258,10 +259,6 @@
     <Compile Include="Migrations\201703151337462_version4.cs" />
     <Compile Include="Migrations\201703151337462_version4.Designer.cs">
       <DependentUpon>201703151337462_version4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703190059058_version5.cs" />
-    <Compile Include="Migrations\201703190059058_version5.Designer.cs">
-      <DependentUpon>201703190059058_version5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -360,6 +357,8 @@
     <Content Include="Views\Location\_Location.cshtml" />
     <Content Include="Views\Home\Markers.cshtml" />
     <Content Include="Views\Location\DetailForUser.cshtml" />
+    <Content Include="Views\Errors\NotFound.cshtml" />
+    <Content Include="Views\Errors\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -385,9 +384,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703151337462_version4.resx">
       <DependentUpon>201703151337462_version4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703190059058_version5.resx">
-      <DependentUpon>201703190059058_version5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
