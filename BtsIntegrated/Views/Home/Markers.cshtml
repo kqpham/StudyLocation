@@ -54,6 +54,7 @@
             var locatioWebsite=new Array();
             var locationId = new Array();
             var locationRatingLink = new Array();
+            var locationCommentLink = new Array();
             var lCount = @Model.Locations.Count();
             var contentString = [];
             @foreach (var data in Model.Locations)
@@ -66,6 +67,7 @@
                 @:locatioWebsite.push("@data.Website");
                 @:locationId.push("@data.LocationId");
                 @:locationRatingLink.push('@Url.Action("Create","Rating",new {id = data.LocationId,lat = Model.Latitude, lng=Model.Longitude})');
+                @:locationCommentLink.push('@Url.Action("Create","Comment",new {id = data.LocationId,lat = Model.Latitude, lng=Model.Longitude})');
 
             }
                 for (i = 0; i < lCount; i++)
@@ -76,14 +78,14 @@
                     map: map
                 });
 
-                    //Insert hyperlink inot the provided areas to configure the 
+                    //Insert hyperlink inot the provided areas to configure the
                     //redirection to specified views
                   contentString.push( '<h5>'+ locationName[i] +'</h5>' +
                     '<div>' +
                     '<p>'+ locationAddress[i] +'</p>'+
                     '<p>'+ locationPhone[i] +'</p>' +
                     '<p>'+ locatioWebsite[i] +'</p>' +
-                    '<a href=""> Comment About Location...</a>' +
+                    '<a href="'+ locationCommentLink[i]+'" data-toggle="modal" data-target="#modal-container"> Comment About Location...</a>' +
                     '</br>'+
                     '<a href="'+ locationRatingLink[i]+'" data-toggle="modal" data-target="#modal-container"> Rate Location...</a>' +
                     '</br>'+

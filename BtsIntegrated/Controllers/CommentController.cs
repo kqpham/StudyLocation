@@ -8,6 +8,7 @@ namespace BtsIntegrated.Controllers
 {
     public class CommentController : Controller
     {
+        Manager m = new Manager();
         // GET: Comment
         public ActionResult Index()
         {
@@ -23,23 +24,54 @@ namespace BtsIntegrated.Controllers
         // GET: Comment/Create
         public ActionResult Create()
         {
-            return View();
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return PartialView("_Comment", new CommentAdd());
         }
 
         // POST: Comment/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CommentAdd newComment, int id, double lat, double lng)
         {
             try
             {
-                // TODO: Add insert logic here
+                if(!HttpContext.User.Identity.IsAuthenticated)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                if(!ModelState.IsValid)
+                {
+                    RedirectToAction("Index", "Home");
+                }
+                newComment.LocationId = id;
+                m.LocationAddComment(newComment);
 
-                return RedirectToAction("Index");
+                var geoCoord = new UserGeoLocation
+                {
+                    Latitude = lat,
+                    Longitude = lng,
+                };
+
+                
+                return RedirectToAction("Markers","Home",geoCoord);
             }
             catch
             {
                 return View();
             }
+        }
+
+        public ActionResult ModalAction(int id)
+        {
+            var d = m.LocationGetOne(id);
+            if(d == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_Comment", new CommentAdd());
         }
 
         // GET: Comment/Edit/5

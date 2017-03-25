@@ -61,7 +61,6 @@ namespace BtsIntegrated.Controllers
                 cfg.CreateMap<Models.Location, Controllers.LocationWithTimings>();
                 cfg.CreateMap<Models.Timing, Controllers.TimingBase>();
                 cfg.CreateMap<Models.Comment, Controllers.CommentBase>();
-                cfg.CreateMap<Models.Comment, Controllers.CommentWithLocation>();
                 cfg.CreateMap<Rating, RatingBase>();
 
                 //mapping for storing data to database
@@ -274,17 +273,18 @@ namespace BtsIntegrated.Controllers
             return mapper.Map<IEnumerable<CommentBase>>(ds.Comments);
         }
 
-        public IEnumerable<CommentWithLocation> GetCommentsOneLocation(int id)
+        /*public IEnumerable<CommentWithLocation> GetCommentsOneLocation(int id)
         {
             var data = ds.Comments.Include("Location").SingleOrDefault(i => i.Location.LocationId == id);
             return (data == null) ? null : mapper.Map<IEnumerable<CommentWithLocation>>(data);
-        }
+        }*/
 
-        public CommentWithLocation LocationAddComment(CommentBase newComment)
+        public CommentAdd LocationAddComment(CommentAdd newComment)
         {
             var addComment = ds.Comments.Add(mapper.Map<Comment>(newComment));
+            addComment.UserName = HttpContext.Current.User.Identity.Name;
             ds.SaveChanges();
-            return (addComment == null) ? null : mapper.Map<CommentWithLocation>(addComment);
+            return (addComment == null) ? null : mapper.Map<CommentAdd>(addComment);
         }
 
         //Ratings Methods
