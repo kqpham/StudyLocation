@@ -27,6 +27,18 @@ namespace BtsIntegrated.Controllers
             return View(data);
         }
 
+        public ActionResult PubLocationDetails(int? id)
+        {
+            var o = m.LocationGetOneWithComment(id.GetValueOrDefault());
+            if( o == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(o);
+            }
+        }
         // GET: Location/Create
         public ActionResult Create()
         {
