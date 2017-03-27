@@ -55,6 +55,7 @@
             var locationId = new Array();
             var locationRatingLink = new Array();
             var locationCommentLink = new Array();
+            var locationDetailLink = new Array();
             var lCount = @Model.Locations.Count();
             var contentString = [];
             @foreach (var data in Model.Locations)
@@ -68,7 +69,7 @@
                 @:locationId.push("@data.LocationId");
                 @:locationRatingLink.push('@Url.Action("Create","Rating",new {id = data.LocationId,lat = Model.Latitude, lng=Model.Longitude})');
                 @:locationCommentLink.push('@Url.Action("Create","Comment",new {id = data.LocationId,lat = Model.Latitude, lng=Model.Longitude})');
-
+                @:locationDetailLink.push('@Url.Action("PubLocationDetails", "Location" , new { id = data.LocationId })');
             }
                 for (i = 0; i < lCount; i++)
                 {
@@ -89,7 +90,7 @@
                     '</br>'+
                     '<a href="'+ locationRatingLink[i]+'" data-toggle="modal" data-target="#modal-container"> Rate Location...</a>' +
                     '</br>'+
-                    '<a> Location Detail...</a>'+
+                    '<a href="' + locationDetailLink[i] + '"> Location Detail...</a>'+
                     '</div>');
 
                 window.google.maps.event.addListener(marker, 'click', (function (marker, i) {

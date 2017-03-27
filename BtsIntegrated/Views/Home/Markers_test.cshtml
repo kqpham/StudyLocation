@@ -1,0 +1,129 @@
+﻿@model BtsIntegrated.Controllers.UserGeoWithLocations
+@{
+    ViewBag.Title = "Markers";
+
+    var tempLat = 0;
+    var tempLng = 0;
+}
+<h2>Markers</h2>
+<div class="row">
+    <div id="map" class="col-md-6">
+    </div>
+    <style>
+        #map {
+            height: 600px;
+            width: 800px;
+        }
+    </style>
+    <script>
+        function initMap() {
+            //modify coordinates to change location
+            // var uluru = { lat: 43.771311, lng: -79.498853 };
+            var uluru = { lat: @Model.Latitude, lng: @Model.Longitude };
+            var map = new window.google.maps.Map(document.getElementById('map'), {
+                @*zoom sets the amount of area to show. setting 0 shows the entire planet. max readable is 17*@
+                zoom: @Model.Zoom,
+                center: uluru
+            });
+
+            var markerUser = new window.google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+            var contentStringUser = '<h5>You are here</h5>';
+            var infowindowUser = new window.google.maps.InfoWindow
+                ({
+                    content: contentStringUser
+                });
+
+            markerUser.addListener('click',
+            function() {
+                infowindowUser.open(map, markerUser);
+            });
+
+             var infowindow = new window.google.maps.InfoWindow({});
+
+            var i;
+            var marker;
+            var locationLat=new Array();
+            var locationLng=new Array();
+            var locationName=new Array();
+            var locationAddress=new Array();
+            var locationPhone=new Array();
+            var locatioWebsite=new Array();
+            var locationId = new Array();
+            var locationRatingLink = new Array();
+            var locationCommentLink = new Array();
+            var lCount = @Model.Locations.Count();
+            var contentString = [];
+            @foreach (var data in Model.Locations)
+            {
+                @:locationLat.push("@data.Latitude");
+                @:locationLng.push("@data.Longitude");
+                @:locationName.push("@data.Name");
+                @:locationAddress.push("@data.Address");
+                @:locationPhone.push("@data.PhoneNumber");
+                @:locatioWebsite.push("@data.Website");
+                @:locationId.push("@data.LocationId");
+                @:locationRatingLink.push('@Url.Action("Create","Rating",new {id = data.LocationId,lat = Model.Latitude, lng=Model.Longitude})');
+                @:locationCommentLink.push('@Url.Action("Create","Comment",new {id = data.LocationId,lat = Model.Latitude, lng=Model.Longitude})');
+
+            }
+                for (i = 0; i < lCount; i++)
+                {
+                    marker = new window.google.maps.Marker
+                    ({
+                    position: new window.google.maps.LatLng(locationLat[i], locationLng[i]),
+                    map: map
+                });
+
+                    //Insert hyperlink inot the provided areas to configure the
+                    //redirection to specified views
+                  contentString.push( '<h5>'+ locationName[i] +'</h5>' +
+                    '<div>' +
+                    '<p>'+ locationAddress[i] +'</p>'+
+                    '<p>'+ locationPhone[i] +'</p>' +
+                    '<p>'+ locatioWebsite[i] +'</p>' +
+                    '<a href="'+ locationCommentLink[i]+'" data-toggle="modal" data-target="#modal-container"> Comment About Location...</a>' +
+                    '</br>'+
+                    '<a href="'+ locationRatingLink[i]+'" data-toggle="modal" data-target="#modal-container"> Rate Location...</a>' +
+                    '</br>'+
+                    '<a> Location Detail...</a>'+
+                    '</div>');
+
+                window.google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(contentString[i]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+            }
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2XYssb3qlLDRd1KOE7Knxy-6hnrl1xbM&callback=initMap"
+            type="text/javascript"></script>
+    <br />
+    <br />
+    @using (Html.BeginForm("Markers", "Home", FormMethod.Post))
+    {
+        <div class="col-lg-3"></div>
+        <div class="form-group col-lg-4">
+            <div>
+                @Html.EditorFor(m => m.PostalCode, new { htmlAttributes = new { @class = "form-control input-lg" } })
+                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                @Html.HiddenFor(p => p.PostalCode)
+
+                <input type="submit" value="Search Again" class="btn-lg btn-primary" />
+
+            </div>
+
+            <label>Zoom Size:</label>
+            @Html.RadioButtonFor(model => model.Zoom, 11, new { id = "11" }) 11
+            @Html.RadioButtonFor(model => model.Zoom, 12, new { id = "12" }) 12
+            @Html.RadioButtonFor(model => model.Zoom, 14, new { id = "14" }) 14
+            <br />
+
+        </div>
+        <div class="col-lg-3"></div>
+    }
+</div>

@@ -14,7 +14,7 @@ namespace BtsIntegrated.Controllers
         Manager m = new Manager();
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         public ActionResult About()
@@ -70,7 +70,7 @@ namespace BtsIntegrated.Controllers
                 Locations = m.LocationGetAll()
                 
             };
-            return View(userGeoCoord);
+            return View("Markers",userGeoCoord);
         }
     }
 }

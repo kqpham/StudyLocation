@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BtsIntegrated.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LocationController : Controller
     {
         Manager m = new Manager();
@@ -26,7 +27,19 @@ namespace BtsIntegrated.Controllers
             }
             return View(data);
         }
-
+        [AllowAnonymous]
+        public ActionResult PubLocationDetails(int? id)
+        {
+            var o = m.LocationGetOneWithComment(id.GetValueOrDefault());
+            if (o == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(o);
+            }
+        }
         // GET: Location/Create
         public ActionResult Create()
         {
@@ -42,7 +55,7 @@ namespace BtsIntegrated.Controllers
                 return View(newLocation);
             }
             var addedLocation = m.LocationAdd(newLocation);
-           
+
             if (addedLocation == null)
             {
                 return View(newLocation);

@@ -347,6 +347,9 @@
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\ServerError.cshtml" />
     <Content Include="Views\Rating\_Rating.cshtml" />
+    <Content Include="Views\Home\Index_test.cshtml" />
+    <Content Include="Views\Home\Markers_test.cshtml" />
+    <Content Include="Views\Location\PubLocationDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

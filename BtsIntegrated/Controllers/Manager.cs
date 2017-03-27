@@ -59,8 +59,10 @@ namespace BtsIntegrated.Controllers
                 //mappig for getting data from the database
                 cfg.CreateMap<Models.Location, Controllers.LocationBase>();
                 cfg.CreateMap<Models.Location, Controllers.LocationWithTimings>();
+                cfg.CreateMap<Models.Location, Controllers.LocationDetailWithComment>();
                 cfg.CreateMap<Models.Timing, Controllers.TimingBase>();
                 cfg.CreateMap<Models.Comment, Controllers.CommentBase>();
+                cfg.CreateMap<Models.Comment, Controllers.CommentAdd>();
                 cfg.CreateMap<Rating, RatingBase>();
 
                 //mapping for storing data to database
@@ -278,6 +280,14 @@ namespace BtsIntegrated.Controllers
             var data = ds.Comments.Include("Location").SingleOrDefault(i => i.Location.LocationId == id);
             return (data == null) ? null : mapper.Map<IEnumerable<CommentWithLocation>>(data);
         }*/
+
+
+        public LocationDetailWithComment LocationGetOneWithComment(int id)
+        {
+            var data = ds.Locations.Include("Timing").Include("Comments")
+                .SingleOrDefault(i => i.LocationId == id);
+            return mapper.Map<LocationDetailWithComment>(data);
+        }
 
         public CommentAdd LocationAddComment(CommentAdd newComment)
         {

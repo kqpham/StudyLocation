@@ -153,7 +153,7 @@ namespace BtsIntegrated.Controllers
         public IEnumerable<LocationBase> Locations;
     }
 
-    public class LocationDetailWithComment:LocationWithTimings
+    public class LocationDetailWithComment : LocationWithTimings
     {
         public LocationDetailWithComment()
         {
@@ -162,6 +162,6 @@ namespace BtsIntegrated.Controllers
 
         //public IEnumerable<Rating> Ratings { get; set; }
         public IEnumerable<CommentBase> Comments { get; set; }
-        
+
     }
 }
