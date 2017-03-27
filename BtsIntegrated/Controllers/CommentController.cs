@@ -75,25 +75,37 @@ namespace BtsIntegrated.Controllers
         }
 
         // GET: Comment/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            var o = m.CommentGetByIdWithDetail(id.GetValueOrDefault());
+            if (o == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var form = m.mapper.Map<CommentEditForm>(o);
+                return PartialView(form);
+            }
         }
 
         // POST: Comment/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int? id, CommentEdit newComment)
         {
-            try
+           if(!ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = newComment.CommentId });
             }
-            catch
-            {
-                return View();
-            }
+            var editedComment = m.CommentEditLines(newComment);
+           // if (editedComment == null)
+          //  {
+               // return RedirectToAction("edit", new { id = newComment.CommentId });
+          //  }
+           // else
+           // {
+                return RedirectToAction("PubLocationDetails", new { id = newComment.CommentId });
+           // }
         }
 
         // GET: Comment/Delete/5

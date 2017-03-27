@@ -70,6 +70,9 @@ namespace BtsIntegrated.Controllers
                 cfg.CreateMap<Controllers.TimingAdd, Models.Timing>();
                 cfg.CreateMap<Controllers.CommentAdd, Models.Comment>();
                 cfg.CreateMap<RatingAdd, Rating>();
+
+                cfg.CreateMap<Controllers.CommentBase, Controllers.CommentEditForm>();
+                cfg.CreateMap<Controllers.CommentAdd, Controllers.CommentEditForm>();
             });
 
             mapper = config.CreateMapper();
@@ -289,7 +292,28 @@ namespace BtsIntegrated.Controllers
             ds.SaveChanges();
             return (addComment == null) ? null : mapper.Map<CommentAdd>(addComment);
         }
-
+        //For edit comment
+        public CommentAdd CommentGetByIdWithDetail(int id)
+        {
+            var o = ds.Comments.Include("Location")
+                .SingleOrDefault(v => v.CommentId == id);
+            return mapper.Map<CommentAdd>(o);
+        }
+        public CommentAdd CommentEditLines(CommentEdit newComment)
+        {
+            var o = ds.Comments.Include("Location")
+                .SingleOrDefault(v => v.CommentId == newComment.CommentId);
+            if( o == null)
+            {
+                return null;
+            }
+            else
+            {
+                ds.Entry(o).CurrentValues.SetValues(newComment);
+                ds.SaveChanges();
+                return mapper.Map<CommentAdd>(o);
+            }
+        }
         //Ratings Methods
 
         //public RatingBase GetOneLoactionForRating(int id)

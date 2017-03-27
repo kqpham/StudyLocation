@@ -231,9 +231,12 @@
         </table>
     </div>
 
+    
+
     <h3>Comments</h3>
-    <dd>
-        @if (Model.Comments.Count() == 0 )
+    @*<dd>*@
+        
+        @if (Model.Comments.Count() == 0)
         {
             <span>(none)</span>
         }
@@ -241,12 +244,36 @@
         {
             foreach (var item in Model.Comments)
             {
-                <span>@item.CommentLines</span>
+                @item.CommentLines 
+                @Html.ActionLink("Edit Comment", "../Comment/Edit", new { id = item.CommentId })
+                <br />
+
             }
+
+            /*<script>
+
+                function addMore()
+                {
+                    var max = 5;
+                    //var i =
+
+                    @foreach (var item in Model.Comments)
+                    {
+
+
+                    }
+                    for (var i = 0; i < max; i++)
+                      {
+                            @item.CommentLines <br/>
+                        }
+                    }
+            </script>*/
         }
-    </dd>
+    
+    @*</dd>*@
 </div>
 <p>
+    @Html.ActionLink("Create Comment", "../Comment/Create", new { id = Model.LocationId }) |
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
