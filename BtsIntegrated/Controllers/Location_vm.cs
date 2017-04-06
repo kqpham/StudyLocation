@@ -160,8 +160,13 @@ namespace BtsIntegrated.Controllers
             Comments = new List<CommentBase>();
         }
 
+        //public double RatingratingAVG { get; set; }
         //public IEnumerable<Rating> Ratings { get; set; }
         public IEnumerable<CommentBase> Comments { get; set; }
-        
+
+    }
+    public class locationB
+    {
+        public int LocationId { get; set; }
     }
 }
