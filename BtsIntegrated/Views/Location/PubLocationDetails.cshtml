@@ -243,10 +243,10 @@
         }
         else
         {
-            var n = 5;
-            var commentsLeft = Model.Comments.Count();
+           // var n = 5;
+           // var commentsLeft = Model.Comments.Count();
 
-                foreach (var item in Model.Comments.Take(n)) //.Take(5))
+                foreach (var item in Model.Comments) //.Take(5))
                 {
                 @item.CommentLines
 
@@ -261,14 +261,14 @@
                 </p>
                 <br />
                 }
-            <input type="button" value="More Comments" onclick="addMore();"/>
+            @*<input type="button" value="More Comments" onclick="addMore();"/>
          <button onclick="addMore()"> More comments </button>
            
         <script>
             function addMore() { 
                 n+5
             };
-        </script>
+        </script>*@
         @*var commentsLeft = Model.Comments.Count();
         var max = 5;
         var start = 0;
