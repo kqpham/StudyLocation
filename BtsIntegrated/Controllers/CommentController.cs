@@ -142,5 +142,14 @@ namespace BtsIntegrated.Controllers
             return RedirectToAction("../Location/PubLocationDetails", new { id = locId });
             //return RedirectToAction("Index");
         }
+        public ActionResult DeleteAction(int id)
+        {
+            var d = m.CommentGetById(id);
+            if(d == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("Delete", d);
+        }
     }
 }

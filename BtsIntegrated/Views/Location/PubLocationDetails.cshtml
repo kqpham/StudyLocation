@@ -243,33 +243,55 @@
         }
         else
         {
-            foreach (var item in Model.Comments)
-            {
+            var n = 5;
+            var commentsLeft = Model.Comments.Count();
+
+                foreach (var item in Model.Comments.Take(n)) //.Take(5))
+                {
                 @item.CommentLines
 
                 <p>
                     @Html.ActionLink("Edit Comment", "../Comment/Edit", new { id = item.CommentId, locId = Model.LocationId }) |
-                    @Html.ActionLink("Delete Comment", "../Comment/Delete", new { id = item.CommentId, locId = Model.LocationId })
+                    @*@Html.ActionLink("Delete Comment", "../Comment/Delete", new { id = item.CommentId, locId = Model.LocationId })*@
+                    @Html.ActionLink("Delete Comment", "../Comment/Delete", "Comment", new { id = item.CommentId, locId = Model.LocationId }, new
+               {
+                   data_target = "#modal-container",
+                   data_toggle = "modal"
+               })
                 </p>
                 <br />
-            }
+                }
+            <input type="button" value="More Comments" onclick="addMore();"/>
+         <button onclick="addMore()"> More comments </button>
+           
+        <script>
+            function addMore() { 
+                n+5
+            };
+        </script>
+        @*var commentsLeft = Model.Comments.Count();
+        var max = 5;
+        var start = 0;
+            <script>
 
-            /*<script>
                 function addMore()
                 {
-                    var max = 5;
-                    //var i =
+
                     @foreach (var item in Model.Comments)
                     {
-                    }
-                    for (var i = 0; i < max; i++)
-                      {
+                        @item.CommentLines <br/>
+                        /*for (var i = start; i < max; i++)
+                        {
                             @item.CommentLines <br/>
                         }
+
                     }
-            </script>*/
+                }
+            </script>*/*@     
+            
         }
 
         @*</dd>*@
     </div>
 </div>
+
