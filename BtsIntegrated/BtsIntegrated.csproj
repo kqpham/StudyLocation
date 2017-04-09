@@ -348,10 +348,12 @@
     <Content Include="Views\Errors\ServerError.cshtml" />
     <Content Include="Views\Rating\_Rating.cshtml" />
     <Content Include="Views\Location\PubLocationDetails.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Comment\_Comment.cshtml" />
+    <Content Include="Views\Comment\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
