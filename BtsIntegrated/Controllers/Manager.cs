@@ -70,6 +70,9 @@ namespace BtsIntegrated.Controllers
                 cfg.CreateMap<Controllers.TimingAdd, Models.Timing>();
                 cfg.CreateMap<Controllers.CommentAdd, Models.Comment>();
                 cfg.CreateMap<RatingAdd, Rating>();
+
+                cfg.CreateMap<Controllers.CommentAdd, Controllers.CommentEditForm>();
+                cfg.CreateMap<Controllers.CommentBase, Controllers.CommentEditForm>();
             });
 
             mapper = config.CreateMapper();
@@ -282,6 +285,45 @@ namespace BtsIntegrated.Controllers
         }*/
 
 
+        //Comment get 1 for edit
+        public CommentBase CommentGetById(int id)
+        {
+            var o = ds.Comments.SingleOrDefault
+                (c => c.CommentId == id && c.UserName == HttpContext.Current.User.Identity.Name);
+            return (o == null) ? null : mapper.Map<CommentBase>(o);
+        }
+        public CommentBase CommentEdit(CommentEdit newComment)
+        {
+            var o = ds.Comments.SingleOrDefault
+                (c => c.CommentId == newComment.CommentId && c.UserName == HttpContext.Current.User.Identity.Name);
+
+            if (o == null)
+            {
+                return null;
+            }
+            else
+            {
+                ds.Entry(o).CurrentValues.SetValues(newComment);
+                ds.SaveChanges();
+                return mapper.Map<CommentBase>(o);
+            }
+        }
+        public CommentBase CommentEdit2(CommentEdit newComment)
+        {
+            var o = ds.Comments.Include("location").SingleOrDefault
+                (c => c.CommentId == newComment.CommentId && c.UserName == HttpContext.Current.User.Identity.Name);
+
+            if (o == null)
+            {
+                return null;
+            }
+            else
+            {
+                ds.Entry(o).CurrentValues.SetValues(newComment);
+                ds.SaveChanges();
+                return mapper.Map<CommentBase>(o);
+            }
+        }
         public LocationDetailWithComment LocationGetOneWithComment(int id)
         {
             var data = ds.Locations.Include("Timing").Include("Comments")
@@ -296,12 +338,23 @@ namespace BtsIntegrated.Controllers
             ds.SaveChanges();
             return (addComment == null) ? null : mapper.Map<CommentAdd>(addComment);
         }
+        public bool RemoveComment(int? id)
+        {
+            var c = ds.Comments.Find(id.GetValueOrDefault());
+            if (c != null)
+            {
+                ds.Comments.Remove(c);
+                ds.SaveChanges();
+                return true;
+            }
+            return false;
+        }
 
         //Ratings Methods
 
         //public RatingBase GetOneLoactionForRating(int id)
         //{
-            
+
         //}
         public void RatingAdd(RatingAdd newRating)
         {
@@ -310,6 +363,17 @@ namespace BtsIntegrated.Controllers
             ds.SaveChanges();
         }
 
+        public double GetAvgRatingForOneLocation(int id)
+        {
+            double avg = 0;
+            var data = (from x in ds.Ratings where x.LocationId.Equals(id) select x).ToList();
+            if (data.Any())
+            {
+                avg = (from x in data select x.Value).Average();
+            }
+            //var data = ds.Ratings.SingleOrDefault(i => i.Location.LocationId == id);
+            return avg;
+        }
 
         //End of Comment Section
 

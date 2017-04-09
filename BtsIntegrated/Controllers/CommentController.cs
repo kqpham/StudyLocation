@@ -6,19 +6,20 @@ using System.Web.Mvc;
 
 namespace BtsIntegrated.Controllers
 {
+    [Authorize]
     public class CommentController : Controller
     {
         Manager m = new Manager();
         // GET: Comment
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Comment/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Comment/Create
@@ -38,11 +39,11 @@ namespace BtsIntegrated.Controllers
         {
             try
             {
-                if(!HttpContext.User.Identity.IsAuthenticated)
+                if (!HttpContext.User.Identity.IsAuthenticated)
                 {
                     return RedirectToAction("Login", "Account");
                 }
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     RedirectToAction("Index", "Home");
                 }
@@ -55,19 +56,19 @@ namespace BtsIntegrated.Controllers
                     Longitude = lng,
                 };
 
-                
-                return RedirectToAction("Markers","Home",geoCoord);
+
+                return RedirectToAction("Markers", "Home", geoCoord);
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index","Home");
             }
         }
 
         public ActionResult ModalAction(int id)
         {
             var d = m.LocationGetOne(id);
-            if(d == null)
+            if (d == null)
             {
                 return HttpNotFound();
             }
@@ -75,47 +76,95 @@ namespace BtsIntegrated.Controllers
         }
 
         // GET: Comment/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            var o = m.CommentGetById(id.GetValueOrDefault());
+            if (o == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var form = m.mapper.Map<CommentEditForm>(o);
+                return View(form);
+            }
+            //return View();
         }
 
         // POST: Comment/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int? id, CommentEdit newComment, int locId)
         {
-            try
+            if (!HttpContext.User.Identity.IsAuthenticated)
             {
-                // TODO: Add update logic here
+                return RedirectToAction("Login", "Account");
+            }
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Edit", new { id = newComment });
+            }
+            if (id.GetValueOrDefault() != newComment.CommentId)
+            {
+                return RedirectToAction("PubLocationDetails","Location");
+            }
+            var editedComment = m.CommentEdit2(newComment);
+            var locationNum = new locationB
+            {
+                LocationId = locId
+            };
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("PubLocationDetails","Location", new { id = locId });
+
         }
 
         // GET: Comment/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            //var c = m.LocationGetOneWithComment(id);
+            var c = m.CommentGetById(id);
+            if (c == null)
+            {
+                return HttpNotFound();
+            }
+            //DeleteComment(id);
+            return PartialView(c);
         }
 
         // POST: Comment/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult DeleteComment(int? id, int locId)
         {
-            try
+            if (!HttpContext.User.Identity.IsAuthenticated)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Account");
             }
-            catch
+            var d = m.RemoveComment(id.GetValueOrDefault());
+            if (d == false)
             {
-                return View();
+                return HttpNotFound();
             }
+            //m.RemoveComment(id);
+            return RedirectToAction("PubLocationDetails","Location", new { id = locId });
+            //return RedirectToAction("Index");
+        }
+        public ActionResult DeleteAction(int id)
+        {
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var d = m.CommentGetById(id);
+            if (d == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("Delete", d);
         }
     }
 }

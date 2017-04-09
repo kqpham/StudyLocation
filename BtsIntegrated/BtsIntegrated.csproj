@@ -350,10 +350,12 @@
     <Content Include="Views\Home\Index_test.cshtml" />
     <Content Include="Views\Home\Markers_test.cshtml" />
     <Content Include="Views\Location\PubLocationDetails.cshtml" />
+    <Content Include="Views\Comment\_Comment.cshtml" />
+    <Content Include="Views\Comment\Delete.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -134,12 +134,16 @@ namespace BtsIntegrated.Controllers
     {
         [Required]
         public string PostalCode { get; set; }
-    }
-
-    public class UserGeoLocation
-    {
+        [Required]
+        public double Zoom { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public bool GpsCheck { get; set; }
+    }
+
+    public class UserGeoLocation : UserLocation
+    {
+        public double zoomsize { get; set; }
     }
 
     public class UserGeoWithLocations : UserGeoLocation
@@ -162,6 +166,11 @@ namespace BtsIntegrated.Controllers
 
         //public IEnumerable<Rating> Ratings { get; set; }
         public IEnumerable<CommentBase> Comments { get; set; }
+        public double RatingValue { get; set; }
 
+    }
+    public class locationB
+    {
+        public int LocationId { get; set; }
     }
 }

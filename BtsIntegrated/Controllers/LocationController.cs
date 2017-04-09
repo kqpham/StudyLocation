@@ -31,6 +31,8 @@ namespace BtsIntegrated.Controllers
         public ActionResult PubLocationDetails(int? id)
         {
             var o = m.LocationGetOneWithComment(id.GetValueOrDefault());
+            //add rating data here
+            o.RatingValue = m.GetAvgRatingForOneLocation(id.GetValueOrDefault());
             if (o == null)
             {
                 return HttpNotFound();

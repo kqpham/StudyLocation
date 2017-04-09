@@ -30,12 +30,16 @@ namespace BtsIntegrated.Controllers
         public int CommentId { get; set; }
     }
 
-    /*public class CommentWithLocation : CommentAdd
+    public class CommentEditForm
     {
-        public CommentWithLocation()
-        {
-
-        }
-        public Location Locations { get; set; }
-    }*/
+        public int AccountId { get; set; }
+        public int LocationId { get; set; }
+        public int CommentId { get; set; }
+        public string CommentLines { get; set; }
+    }
+    public class CommentEdit
+    {
+        public int CommentId { get; set; }
+        public string CommentLines { get; set; }
+    }
 }

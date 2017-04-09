@@ -12,9 +12,23 @@ namespace BtsIntegrated.Controllers
     public class HomeController : Controller
     {
         Manager m = new Manager();
-        public ActionResult Index()
+        public ActionResult Index(UserGeoLocation data)
         {
-            return View("Index");
+            try
+            {
+                var userGeoCoord = new UserGeoWithLocations
+                {
+                    Latitude = data.Latitude,
+                    Longitude = data.Longitude,
+                    Locations = m.LocationGetAll()
+
+                };
+                return View(userGeoCoord);
+            }
+            catch
+            {
+                return View("Index");
+            }
         }
 
         public ActionResult About()
@@ -55,7 +69,7 @@ namespace BtsIntegrated.Controllers
         //POST
         [HttpPost]
         //[Route("Markers/{postalCode}")]
-        public ActionResult Markers(string postalCode)
+        public ActionResult Markers(string postalCode, double zoom)
         {
             //SetTemp(postalCode);
             if (postalCode.IsEmpty())
@@ -67,10 +81,11 @@ namespace BtsIntegrated.Controllers
             {
                 Latitude = data[0],
                 Longitude = data[1],
+                zoomsize = zoom,
                 Locations = m.LocationGetAll()
-                
+
             };
-            return View("Markers",userGeoCoord);
+            return View(userGeoCoord);
         }
     }
 }
