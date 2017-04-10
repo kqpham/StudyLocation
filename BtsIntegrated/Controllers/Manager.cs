@@ -337,8 +337,8 @@ namespace BtsIntegrated.Controllers
         public string GetUserNameForComment(int locId)
         {
             string name = "";
-            var data = ds.Comments.Include("location").FirstOrDefault(i => i.LocationId == locId);
-            name=data.UserName;
+            var data = ds.Comments.FirstOrDefault(i => i.LocationId == locId);
+            if (data != null) name=data.UserName;
             return name;
         }
 

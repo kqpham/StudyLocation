@@ -5,8 +5,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>CommentAdd</h4>
+    <div class="form-horizontal row">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -24,7 +23,7 @@
                     @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
                 </div>
             </div>*@
-        <div class="col-md-6 col-lg-6 col-md-offset-4 col-lg-offset-4">
+        <div class="col-md-6 col-lg-6 col-md-offset-4 col-lg-offset-2">
             <div class="form-group">
                 <h3>
                     Enter your comment below
