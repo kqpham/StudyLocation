@@ -157,12 +157,10 @@ namespace BtsIntegrated.Controllers
 
                 //timing addition end
             };
-            if ((data.Address != newItem.Address)||(data.PostalCode != newItem.PostalCode))
-            {
-                var latlng = LatLongCoordsDoubles(newItem);
-                newItem.Latitude = latlng[0];
-                newItem.Longitude = latlng[1];
-            }
+
+            var latlng = LatLongCoordsDoubles(newItem);
+            newItem.Latitude = latlng[0];
+            newItem.Longitude = latlng[1];
             ds.Entry(time).CurrentValues.SetValues(newTiming);
             ds.Entry(data).CurrentValues.SetValues(newItem);
             //ds.Entry(data.Timing).CurrentValues.SetValues(newItem);
