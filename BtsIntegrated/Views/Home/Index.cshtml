@@ -6,6 +6,7 @@
     var hLat = "";
     var hLng = "";
 }
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <div class="jumbotron">
     <h1>Welcome to the Study Space Finder</h1>
@@ -17,7 +18,7 @@
     <div class="col-md-12">
         <div id="map" class="col-md-6 col-md-offset-1"> </div>
         <div class="col-md-2">
-            <div class="checkbox"  display="show">
+            <div class="checkbox"  display="none">
                 <label>
                     <input type="checkbox" name="filter" id="bathroomCheckBox" value="bathroom" checked="checked" /> Bathroom
                 </label>
@@ -217,9 +218,10 @@
     }
 </div>
 
-<script>
-    //added
-    var map;
+@*<script>
+    $(document).ready({
+        //added
+     var map=null;
     var markers = [];
 
     var filters = {bathroom:false, wifi:false, cash:false, creditCard:false, handicap:false, food:false, printers:false, powerOutlets:false}
@@ -264,4 +266,5 @@
             filters[id_val] = true;
     }
     //
-</script>
+    });
+</script>*@
