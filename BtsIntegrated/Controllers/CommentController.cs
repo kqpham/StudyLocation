@@ -35,13 +35,13 @@ namespace BtsIntegrated.Controllers
 
         // POST: Comment/Create
         [HttpPost]
-        public ActionResult Create(CommentAdd newComment, int id, double lat, double lng)
+        public void Create(CommentAdd newComment, int id, double lat, double lng)
         {
             try
             {
                 if (!HttpContext.User.Identity.IsAuthenticated)
                 {
-                    return RedirectToAction("Login", "Account");
+                     RedirectToAction("Login", "Account");
                 }
                 if (!ModelState.IsValid)
                 {
@@ -57,11 +57,11 @@ namespace BtsIntegrated.Controllers
                 };
 
 
-                return RedirectToAction("Markers", "Home", geoCoord);
+                //return RedirectToAction("Index", "Home");
             }
             catch
             {
-                return RedirectToAction("Index","Home");
+                 RedirectToAction("Index","Home");
             }
         }
 

@@ -34,11 +34,11 @@ namespace BtsIntegrated.Controllers
 
         // POST: Rating/Create
         [HttpPost]
-        public ActionResult Create(RatingAdd newRating, int id,double lat,double lng)
+        public void Create(RatingAdd newRating, int id,double lat,double lng)
         {
             if (!HttpContext.User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Login", "Account");
+                 RedirectToAction("Login", "Account");
             }
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace BtsIntegrated.Controllers
                 //Locations = m.LocationGetAll()
 
             };
-            return RedirectToAction("Markers","Home",userGeoCoord);
+            //return RedirectToAction("Index","Home");
 
         }
 

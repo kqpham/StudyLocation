@@ -253,7 +253,11 @@
 
                 <p>
                     @Html.ActionLink("Edit Comment", $"../Comment/Edit", new { id = item.CommentId, locId = Model.LocationId }) |
-                    @Html.ActionLink("Delete Comment",$"../Comment/Delete", new { id = item.CommentId, locId = Model.LocationId })
+                    @Html.ActionLink("Delete Comment", $"../Comment/Delete", "Comment", new { id = item.CommentId, locId = Model.LocationId }, new
+               {
+                   data_target = "#modal-container",
+                   data_toggle = "modal"
+               })
                 </p>
                 <br />
             }
