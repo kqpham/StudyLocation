@@ -17,37 +17,37 @@
     <div class="col-md-12">
         <div id="map" class="col-md-6 col-md-offset-1"> </div>
         <div class="col-md-2">
-            <div class="checkbox">
+            <div class="checkbox"  display="show">
                 <label>
-                    <input type="checkbox" id="bathroomCheckBox" value="bathroom" checked="checked"/> Bathroom
-                </label>
-                <br/>
-                <label>
-                    <input type="checkbox" id="wifiCheckbox" value="wifi" checked="checked"/> Wifi
+                    <input type="checkbox" name="filter" id="bathroomCheckBox" value="bathroom" checked="checked" /> Bathroom
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" id="cashCheckbox" value="cash" checked="checked"/>Cash
+                    <input type="checkbox" name="filter" id="wifiCheckbox" value="wifi" checked="checked" /> Wifi
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" id="creditCardCheckBox" value="creditcard" checked="checked"/> Credit Card
+                    <input type="checkbox" name="filter" id="cashCheckbox" value="cash" checked="checked" />Cash
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" id="handicapCheckbox" value="handicap" checked="checked"/> Handicap Accessible
+                    <input type="checkbox" name="filter" id="creditCardCheckBox" value="creditcard" checked="checked" /> Credit Card
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" id="foodCheckBox" value="food" checked="checked" /> Food Available
+                    <input type="checkbox" name="filter" id="handicapCheckbox" value="handicap" checked="checked" /> Handicap Accessible
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" id="printersCheckbox" value="printers" checked="checked"/>Printers
+                    <input type="checkbox" name="filter" id="foodCheckBox" value="food" checked="checked" /> Food Available
                 </label>
                 <br />
                 <label>
-                    <input type="checkbox" id="powerOutletCheckbox" value="poweroutlets" checked="checked"/>Power Outlets
+                    <input type="checkbox" name="filter" id="printersCheckbox" value="printers" checked="checked" />Printers
+                </label>
+                <br />
+                <label>
+                    <input type="checkbox" name="filter" id="powerOutletCheckbox" value="poweroutlets" checked="checked" />Power Outlets
                 </label>
                 <br />
             </div>            
@@ -216,3 +216,52 @@
         <div class="col-lg-3"></div>
     }
 </div>
+
+<script>
+    //added
+    var map;
+    var markers = [];
+
+    var filters = {bathroom:false, wifi:false, cash:false, creditCard:false, handicap:false, food:false, printers:false, powerOutlets:false}
+
+    $(function() {
+        $('input[name=filter]').change(function(e) {
+            map_filter(this.id);
+            filter_markers();
+        });
+    });
+
+    var get_set_options = function() {
+        ret_array = [];
+        for (option in filters){
+            if (filters[option]) {
+                ret_array.push(option);
+            }
+        }
+        return ret_array;
+    }
+
+    var filter_markers = function() {
+        set_filters = get_set_options();
+
+        for (i=0; i<markers.length; i++){
+            marker = markers[i];
+
+            keep = true;
+            for(opt=0; opt<set_filters.length; opt++){
+                if(!marKer.properties[set_filters[opt]]){
+                    keep = false;
+                }
+            }
+            marker.setVisible(keep);
+        }
+    }
+
+    var map_filter = function(id_val) {
+        if (filters[id_val])
+            filters[id_val] = false;
+        else
+            filters[id_val] = true;
+    }
+    //
+</script>

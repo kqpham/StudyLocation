@@ -167,6 +167,7 @@ namespace BtsIntegrated.Controllers
         //public IEnumerable<Rating> Ratings { get; set; }
         public IEnumerable<CommentBase> Comments { get; set; }
         public double RatingValue { get; set; }
+        public string CommentUserName { get; set; }
 
     }
     public class locationB

@@ -1,7 +1,7 @@
 ﻿@model BtsIntegrated.Controllers.LocationDetailWithComment
 
 @{
-    ViewBag.Title = "PubLocationDetails";
+    ViewBag.Title = "Location Details";
     var name = Model.Name;
     var addressFull = Model.Address + "," + Model.City + "," + Model.PostalCode;
     var phoneNumber = Model.PhoneNumber;
@@ -10,7 +10,7 @@
     var lng = Model.Longitude;
 }
 
-<h2>LocationDetails</h2>
+<h2>Location Details for @Model.Name</h2>
 
 <div class="row">
     @*<h4>LocationDetailWithComment</h4>*@
@@ -250,15 +250,18 @@
             foreach (var item in Model.Comments)
             {
                 @item.CommentLines
-
-                <p>
-                    @Html.ActionLink("Edit Comment", $"../Comment/Edit", new { id = item.CommentId, locId = Model.LocationId }) |
-                    @Html.ActionLink("Delete Comment", $"../Comment/Delete", "Comment", new { id = item.CommentId, locId = Model.LocationId }, new
+                if (Model.CommentUserName == HttpContext.Current.User.Identity.Name)
+                {
+                    <p>
+                        @Html.ActionLink("Edit Comment", $"../Comment/Edit", new { id = item.CommentId, locId = Model.LocationId }) |
+                        @Html.ActionLink("Delete Comment", $"../Comment/Delete", "Comment", new { id = item.CommentId, locId = Model.LocationId }, new
                {
                    data_target = "#modal-container",
                    data_toggle = "modal"
                })
-                </p>
+                    </p>
+                }
+
                 <br />
             }
 

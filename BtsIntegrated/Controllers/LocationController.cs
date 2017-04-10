@@ -33,6 +33,7 @@ namespace BtsIntegrated.Controllers
             var o = m.LocationGetOneWithComment(id.GetValueOrDefault());
             //add rating data here
             o.RatingValue = m.GetAvgRatingForOneLocation(id.GetValueOrDefault());
+            o.CommentUserName = m.GetUserNameForComment(id.GetValueOrDefault());
             if (o == null)
             {
                 return HttpNotFound();

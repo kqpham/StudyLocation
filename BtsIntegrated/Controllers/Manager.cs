@@ -290,26 +290,12 @@ namespace BtsIntegrated.Controllers
                 (c => c.CommentId == id && c.UserName == HttpContext.Current.User.Identity.Name);
             return (o == null) ? null : mapper.Map<CommentBase>(o);
         }
-        public CommentBase CommentEdit(CommentEdit newComment)
-        {
-            var o = ds.Comments.SingleOrDefault
-                (c => c.CommentId == newComment.CommentId && c.UserName == HttpContext.Current.User.Identity.Name);
 
-            if (o == null)
-            {
-                return null;
-            }
-            else
-            {
-                ds.Entry(o).CurrentValues.SetValues(newComment);
-                ds.SaveChanges();
-                return mapper.Map<CommentBase>(o);
-            }
-        }
         public CommentBase CommentEdit2(CommentEdit newComment)
         {
             var o = ds.Comments.Include("location").SingleOrDefault
                 (c => c.CommentId == newComment.CommentId && c.UserName == HttpContext.Current.User.Identity.Name);
+           // addComment.UserName = HttpContext.Current.User.Identity.Name;
 
             if (o == null)
             {
@@ -346,6 +332,14 @@ namespace BtsIntegrated.Controllers
                 return true;
             }
             return false;
+        }
+
+        public string GetUserNameForComment(int locId)
+        {
+            string name = "";
+            var data = ds.Comments.Include("location").FirstOrDefault(i => i.LocationId == locId);
+            name=data.UserName;
+            return name;
         }
 
         //Ratings Methods
